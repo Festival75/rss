@@ -1,15 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Index</title>
-</head>
-<body>
+{% extends 'bootstrap3.html' %}
+{% load bootstrap3 %}
+{% block bootstrap3_content %}
+    <!-- HEADER start -->
+    <nav class="navbar navbar-default navbar-fixed-top" style="...">
+        <div class="container">
+            <div class="navbar-header">
+                <span>
+                    <a class="navbar-brand"><i class="fa fa-rss"></i> My RSS</a>
 
-    {% if value == 'Hello Python' %}
-        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam atque blanditiis consequatur consequuntur cumque deserunt dolor earum eligendi facere id in maiores, minima perferendis placeat quis sapiente sit ullam. Optio?</span>
-    {% endif %}
 
-    <span>{{ number }}</span>
-</body>
-</html>
+                </span>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-text">
+                    <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#loginModal">Login</button>
+                    <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#regModal">Registration</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- HEADER end -->
+
+    <!-- MAIN start -->
+    <div class="container" style="margin-top: 100px">
+        <div class="row">
+            <div class="col-xs-0 col-md-3"></div>
+            <div class="col-xx-0 col-md-6">
+                {% for post in posts %}
+                    <div class="post-block">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h3>{{ post.title }}</h3>
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div>{{ post.text }}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 text-right">
+                                    <div class="btn-group">
+                                        <a href="/post/{{ post.id }}/" class="btn btn-sm btn-default">Read</a>
+                                        <button class="btn btn-sm btn-default">Add Favorite</button>
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
+            </div>
+            <div class="col-xs-0 col-md-3"></div>
+        </div>
+    </div>
+    <!-- MAIN start -->
+
+    <!-- LoginModal start -->
+    <div id="loginModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Log IN</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Log IN forms</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">LogIN</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- LoginModal end -->
+
+    <!-- RegisterModal start -->
+    <div id="regModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Registration</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Registration forms</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Registration</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- RegisterModal end -->
+
+{% endblock %}
+
