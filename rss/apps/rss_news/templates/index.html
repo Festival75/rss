@@ -1,4 +1,5 @@
 {% extends 'bootstrap3.html' %}
+{% load staticfiles %}
 {% load bootstrap3 %}
 {% block bootstrap3_content %}
     <!-- HEADER start -->
@@ -14,7 +15,8 @@
             <div class="navbar-right">
                 <div class="navbar-text">
                     <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#loginModal">Login</button>
-                    <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#regModal">Registration</button>
+                    <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#regModal">Registration
+                    </button>
                 </div>
             </div>
         </div>
@@ -61,7 +63,7 @@
     <!-- MAIN start -->
 
     <!-- LoginModal start -->
-    <div id="loginModal" class="modal fade" role="dialog">
+    <div id="regModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -70,13 +72,24 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Log IN</h4>
                 </div>
-                <div class="modal-body">
-                    <p>Log IN forms</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">LogIN</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+                <form action="{% url 'signup_user' %}" method="post" id="register_form">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <input type="text" placeholder="Username" name="username" id="username_input"><br>
+                        <input type="password" placeholder="Password" name="password" id="password_input"><br>
+                        <input type="password" placeholder="Password repeat" name="password_repeat" id="password_repeat_input"><br>
+                        <input type="text" placeholder="Email" name="email" id="email_input"><br>
+                        <span id="verify_not" class="warn hidden">Password do not match</span>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" value="Register" id="new_user_register_button">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+                {% block add_script %}
+                    <script src={% static "rss_news/js/login.js" %}></script>
+                    <script src={% static "rss_news/js/verify.js" %}></script>
+                {% endblock %}
             </div>
 
         </div>
@@ -84,7 +97,7 @@
     <!-- LoginModal end -->
 
     <!-- RegisterModal start -->
-    <div id="regModal" class="modal fade" role="dialog">
+    <div id="loginModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->

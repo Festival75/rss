@@ -10,3 +10,13 @@ class Post(models.Model):
 
     def __str__(self):
         return str(self.id) + ' ' + str(self.title)
+
+
+class User(models.Model):
+    id = models.BigIntegerField(primary_key=True)
+    username = models.CharField(max_length=20)
+    password = models.CharField(max_length=20)
+    email = models.CharField(max_length=20)
+
+    def __str__(self):
+        return str(self.id) + ' ' + str(self.username)
